@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clicks{% endblock %}
+
+{% block body %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#clicks').DataTable();
+        });
+    </script>
+
+    <a class="ui primary button" href="/domain">Manage domains</a>
+    <div class="ui divider"></div>
+
+    <table id="clicks">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>UA</th>
+            <th>Referrer</th>
+            <th>IP</th>
+            <th>Param1</th>
+            <th>Param2</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for click in clicks %}
+            <tr>
+                <td>{{ click.getId() }}</td>
+                <td>{{ click.getIp() }}</td>
+                <td>{{ click.getUserAgent() }}</td>
+                <td>{{ click.getReferrer() }}</td>
+                <td>{{ click.getIp() }}</td>
+                <td>{{ click.getParam1() }}</td>
+                <td>{{ click.getParam2() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

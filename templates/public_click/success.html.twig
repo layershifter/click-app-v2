@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Click success!{% endblock %}
+
+{% block body %}
+    <div class="ui success message">
+        <div class="header">Click success</div>
+        <p>All okay, this click is unique</p>
+    </div>
+
+    <ul class="ui list">
+        <li>ID: {{ click.getId() }}</li>
+        <li>IP: {{ click.getIp() }}</li>
+        <li>UA: {{ click.getUserAgent() }}</li>
+        <li>Referrer: {{ click.getReferrer() }}</li>
+        <li>Param1: {{ click.getParam1() }}</li>
+        <li>Param2: {{ click.getParam2() }}</li>
+    </ul>
+{% endblock %}

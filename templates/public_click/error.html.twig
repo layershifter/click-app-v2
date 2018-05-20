@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Click error!{% endblock %}
+
+{% block body %}
+    <div class="ui error message">
+        <div class="header">Click error</div>
+        <p>There is error with click ({{ click.getId() }})</p>
+    </div>
+{% endblock %}

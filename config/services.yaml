@@ -1,0 +1,24 @@
+parameters:
+  click_namespace: a463e3b8-d91d-4590-a742-cb3b328490f6
+  locale: 'en'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  App\:
+    resource: '../src/*'
+    exclude: '../src/{Entity,Migrations,Tests,Kernel.php}'
+
+  App\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+
+  App\Factory\ClickIdFactoryInterface:
+    class: App\Factory\ClickIdFactory
+    arguments: ['@Ramsey\Uuid\UuidFactoryInterface', '%click_namespace%']
+
+  Ramsey\Uuid\UuidFactoryInterface:
+    class: Ramsey\Uuid\UuidFactory
