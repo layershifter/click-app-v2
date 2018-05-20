@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use Ramsey\Uuid\UuidFactoryInterface;
@@ -26,7 +28,7 @@ final class ClickIdFactory implements ClickIdFactoryInterface
     {
         return $this->uuidFactory->uuid5(
             $this->clickNamespace,
-            $ip . $param1 . $referrer . $userAgent
+            $ip.$param1.$referrer.$userAgent
         );
     }
 }

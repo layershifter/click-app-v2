@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Exception\DoubleClickException;
@@ -32,6 +34,7 @@ final class PublicClickController extends Controller
      * @Route("/error/{id}")
      *
      * @param string $id
+     *
      * @return Response
      */
     public function error(string $id): Response
@@ -45,6 +48,7 @@ final class PublicClickController extends Controller
      * @Route("/click/")
      *
      * @param Request $request
+     *
      * @return Response
      */
     public function index(Request $request): Response
@@ -64,6 +68,7 @@ final class PublicClickController extends Controller
      * @Route("/success/{id}")
      *
      * @param string $id
+     *
      * @return Response
      */
     public function success(string $id): Response

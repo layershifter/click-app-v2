@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Dto\ClickDto;
@@ -50,7 +52,7 @@ class Click
 
     public static function createFromDto(ClickDto $dto): Click
     {
-        $click = new self;
+        $click = new self();
 
         $click->id = $dto->getId();
         $click->errorCount = 0;

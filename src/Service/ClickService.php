@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Dto\ClickDto;
@@ -7,7 +9,6 @@ use App\Entity\Click;
 use App\Exception\DoubleClickException;
 use App\Exception\EntityNotFoundException;
 use App\Repository\ClickRepositoryInterface;
-use Doctrine\Common\Collections\Collection;
 
 final class ClickService implements ClickServiceInterface
 {
@@ -26,7 +27,7 @@ final class ClickService implements ClickServiceInterface
      */
     public function findAll(): array
     {
-     return $this->clickRepository->findAll();
+        return $this->clickRepository->findAll();
     }
 
     public function getClickById(string $clickId): Click
@@ -42,7 +43,7 @@ final class ClickService implements ClickServiceInterface
     public function handleClick(ClickDto $clickDto): void
     {
         try {
-            $click = $this->clickRepository->getClickById($clickDto->getId());
+            $click = $this->clickRepository->getClickById($clickDto->getId()->toString());
 
             $click->incrementErrorCount();
             $this->clickRepository->updateClick($click);

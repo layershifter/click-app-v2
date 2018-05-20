@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\Click;
@@ -17,12 +19,14 @@ final class DoctrineClickRepository extends ServiceEntityRepository implements C
     public function addClick(Click $click): void
     {
         $this->_em->persist($click);
-        $this->_em->flush();
+        $this->_em->flush($click);
     }
 
     /**
      * @param string $clickId
+     *
      * @return Click
+     *
      * @throws \App\Exception\EntityNotFoundException
      */
     public function getClickById(string $clickId): Click
@@ -40,6 +44,6 @@ final class DoctrineClickRepository extends ServiceEntityRepository implements C
     public function updateClick(Click $click): void
     {
         $this->_em->persist($click);
-        $this->_em->flush();
+        $this->_em->flush($click);
     }
 }

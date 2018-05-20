@@ -1,8 +1,8 @@
 <?php
 
-namespace Tests\Functional;
+declare(strict_types=1);
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+namespace Tests\Functional;
 
 final class PublicClickControllerTest extends AbstractFunctionalTest
 {

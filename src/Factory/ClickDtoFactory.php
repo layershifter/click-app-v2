@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Factory;
 
 use App\Dto\ClickDto;
-use Ramsey\Uuid\UuidFactory;
-use Ramsey\Uuid\UuidFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 final class ClickDtoFactory implements ClickDtoFactoryInterface
@@ -21,7 +21,9 @@ final class ClickDtoFactory implements ClickDtoFactoryInterface
 
     /**
      * @param Request $request
+     *
      * @return ClickDto
+     *
      * @throws \App\Exception\DtoCreationException
      */
     public function createFromRequest(Request $request): ClickDto

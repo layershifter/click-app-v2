@@ -1,14 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Functional;
 
 use Doctrine\ORM\Tools\SchemaTool;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
 
 abstract class AbstractFunctionalTest extends WebTestCase
 {
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -25,7 +26,7 @@ abstract class AbstractFunctionalTest extends WebTestCase
         $schemaTool->updateSchema($metadata);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

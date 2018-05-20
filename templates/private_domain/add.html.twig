@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Domains{% endblock %}
+
+{% block body %}
+    <a class="ui primary button" href="/">Clicks</a>
+    <a class="ui primary button" href="/domain">Domains</a>
+
+    <div class="ui divider"></div>
+
+
+    <form action="/domain/add" class="ui form" method="post">
+        <div class="ui header">Add domain</div>
+
+        <div class="field">
+            <input name="name" placeholder="domain.com"/>
+        </div>
+
+        <div class="field">
+            <a class="ui button" href="/domain">Cancel</a>
+            <button class="ui primary button">Add</button>
+        </div>
+    </form>
+{% endblock %}
