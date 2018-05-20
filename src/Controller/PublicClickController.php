@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Exception\BadDomainClickException;
 use App\Exception\DoubleClickException;
 use App\Factory\ClickDtoFactoryInterface;
 use App\Service\ClickHandlerServiceInterface;
-use App\Service\ClickService;
 use App\Service\ClickServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,7 +64,7 @@ final class PublicClickController extends Controller
 
         try {
             $this->clickHandlerService->handleClick($clickDto);
-        } catch (DoubleClickException $e) {
+        } catch (BadDomainClickException | DoubleClickException $e) {
             return new RedirectResponse(sprintf('/error/%s', $clickDto->getId()));
         }
 

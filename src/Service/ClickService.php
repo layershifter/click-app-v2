@@ -6,8 +6,6 @@ namespace App\Service;
 
 use App\Dto\ClickDto;
 use App\Entity\Click;
-use App\Exception\DoubleClickException;
-use App\Exception\EntityNotFoundException;
 use App\Repository\ClickRepositoryInterface;
 
 final class ClickService implements ClickServiceInterface

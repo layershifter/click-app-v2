@@ -42,7 +42,7 @@ class ClickDto
 
     /**
      * @param UuidInterface $id
-     * @param array $options
+     * @param array         $options
      *
      * @throws \App\Exception\DtoCreationException
      */

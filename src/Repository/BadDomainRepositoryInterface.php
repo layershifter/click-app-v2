@@ -19,14 +19,18 @@ interface BadDomainRepositoryInterface
 
     /**
      * @param int $domainId
+     *
      * @return BadDomain
+     *
      * @throws \App\Exception\EntityNotFoundException
      */
     public function getDomainById(int $domainId): BadDomain;
 
     /**
      * @param string $domainName
+     *
      * @return BadDomain
+     *
      * @throws \App\Exception\EntityNotFoundException
      */
     public function getDomainByName(string $domainName): BadDomain;

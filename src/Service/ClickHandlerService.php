@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Dto\ClickDto;
-use App\Entity\Click;
+use App\Exception\BadDomainClickException;
 use App\Exception\DoubleClickException;
 use App\Exception\EntityNotFoundException;
 
@@ -27,16 +29,11 @@ final class ClickHandlerService implements ClickHandlerServiceInterface
     /**
      * @param ClickDto $clickDto
      *
+     * @throws \App\Exception\BadDomainClickException
      * @throws \App\Exception\DoubleClickException
      */
     public function handleClick(ClickDto $clickDto): void
     {
-        try {
-            $badDomain = $this->badDomainService->getDomainByName($clickDto->getReferrerDomain());
-        } catch (EntityNotFoundException $e) {
-            $badDomain = null;
-        }
-
         try {
             $click = $this->clickService->getClickById($clickDto->getId()->toString());
             $click->incrementErrorCount();
@@ -45,7 +42,18 @@ final class ClickHandlerService implements ClickHandlerServiceInterface
 
             throw new DoubleClickException('Клик уже существует');
         } catch (EntityNotFoundException $e) {
-            $this->clickService->addClick($clickDto);
+            $click = $this->clickService->addClick($clickDto);
+        }
+
+        try {
+            //$badDomain = $this->badDomainService->getDomainByName($clickDto->getReferrerDomain());
+            $badDomain = $this->badDomainService->getDomainById(2);
+
+            $click->assignBadDomain($badDomain->getName());
+            $this->clickService->updateClick($click);
+
+            throw new BadDomainClickException('У клик bad domain');
+        } catch (EntityNotFoundException $e) {
         }
     }
 }

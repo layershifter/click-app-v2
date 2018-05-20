@@ -22,7 +22,7 @@ class Click
      */
     private $id;
     /**
-     * @ORM\Column(type="integer", name="bad_domain", nullable=true)
+     * @ORM\Column(type="string", name="bad_domain", nullable=true)
      */
     private $badDomain;
     /**
@@ -65,12 +65,19 @@ class Click
         return $click;
     }
 
+    public function assignBadDomain(string $domainName): void
+    {
+        $this->badDomain = $domainName;
+
+        ++$this->errorCount;
+    }
+
     public function getId(): UuidInterface
     {
         return $this->id;
     }
 
-    public function getBadDomain(): ?int
+    public function getBadDomain(): ?string
     {
         return $this->badDomain;
     }

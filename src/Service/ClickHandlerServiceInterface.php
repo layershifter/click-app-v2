@@ -1,10 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
-
 use App\Dto\ClickDto;
-use App\Entity\Click;
 
 interface ClickHandlerServiceInterface
 {
