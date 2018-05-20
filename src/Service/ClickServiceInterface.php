@@ -9,6 +9,8 @@ use App\Entity\Click;
 
 interface ClickServiceInterface
 {
+    public function addClick(ClickDto $clickDto): Click;
+
     /**
      * @return Click[]
      */
@@ -17,9 +19,7 @@ interface ClickServiceInterface
     public function getClickById(string $clickId): Click;
 
     /**
-     * @param ClickDto $clickDto
-     *
-     * @throws \App\Exception\DoubleClickException
+     * @param Click $click
      */
-    public function handleClick(ClickDto $clickDto): void;
+    public function updateClick(Click $click): void;
 }

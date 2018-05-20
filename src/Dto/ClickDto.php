@@ -34,11 +34,15 @@ class ClickDto
     /**
      * @var string
      */
+    private $referrerDomain;
+    /**
+     * @var string
+     */
     private $userAgent;
 
     /**
      * @param UuidInterface $id
-     * @param array         $options
+     * @param array $options
      *
      * @throws \App\Exception\DtoCreationException
      */
@@ -51,11 +55,14 @@ class ClickDto
             throw new DtoCreationException($e->getMessage(), 0, $e);
         }
 
+        $domain = parse_url($params['referrer'], PHP_URL_HOST);
+
         $this->id = $id;
         $this->ip = $params['ip'];
         $this->param1 = $params['param1'];
         $this->param2 = $params['param2'];
         $this->referrer = $params['referrer'];
+        $this->referrerDomain = $domain ?? '';
         $this->userAgent = $params['userAgent'];
     }
 
@@ -82,6 +89,11 @@ class ClickDto
     public function getReferrer(): string
     {
         return $this->referrer;
+    }
+
+    public function getReferrerDomain(): string
+    {
+        return $this->referrerDomain;
     }
 
     public function getUserAgent(): string

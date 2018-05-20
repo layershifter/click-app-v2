@@ -31,8 +31,8 @@ final class ClickDtoFactory implements ClickDtoFactoryInterface
         $ip = $request->getClientIp();
         $param1 = $request->query->get('param1');
         $param2 = $request->query->get('param2');
-        $referrer = $request->headers->get('Referer', 'NA');
-        $userAgent = $request->headers->get('User-Agent');
+        $referrer = $request->headers->get('Referer', '');
+        $userAgent = $request->headers->get('User-Agent', '');
 
         $clickId = $this->clickIdFactory->createId($ip, $param1, $referrer, $userAgent);
 

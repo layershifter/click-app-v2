@@ -6,6 +6,8 @@ namespace App\Controller;
 
 use App\Exception\DoubleClickException;
 use App\Factory\ClickDtoFactoryInterface;
+use App\Service\ClickHandlerServiceInterface;
+use App\Service\ClickService;
 use App\Service\ClickServiceInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +22,19 @@ final class PublicClickController extends Controller
      */
     private $clickDtoFactory;
     /**
+     * @var ClickHandlerServiceInterface
+     */
+    private $clickHandlerService;
+    /**
      * @var ClickServiceInterface
      */
     private $clickService;
 
-    public function __construct(ClickDtoFactoryInterface $clickDtoFactory, ClickServiceInterface $clickHandlerService)
+    public function __construct(ClickDtoFactoryInterface $clickDtoFactory, ClickServiceInterface $clickService, ClickHandlerServiceInterface $clickHandlerService)
     {
         $this->clickDtoFactory = $clickDtoFactory;
-        $this->clickService = $clickHandlerService;
+        $this->clickHandlerService = $clickHandlerService;
+        $this->clickService = $clickService;
     }
 
     /**
@@ -56,7 +63,7 @@ final class PublicClickController extends Controller
         $clickDto = $this->clickDtoFactory->createFromRequest($request);
 
         try {
-            $this->clickService->handleClick($clickDto);
+            $this->clickHandlerService->handleClick($clickDto);
         } catch (DoubleClickException $e) {
             return new RedirectResponse(sprintf('/error/%s', $clickDto->getId()));
         }

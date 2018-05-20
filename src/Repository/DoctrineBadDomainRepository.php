@@ -46,4 +46,27 @@ final class DoctrineBadDomainRepository extends ServiceEntityRepository implemen
 
         return $badDomain;
     }
+
+    /**
+     * @param int $domainId
+     *
+     * @return BadDomain
+     *
+     * @throws \App\Exception\EntityNotFoundException
+     */
+    public function getDomainByName(string $domainName): BadDomain
+    {
+        $badDomain = $this
+            ->createQueryBuilder('bd')
+            ->andWhere('bd.name = :name')
+            ->setParameter('name', $domainName)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+        if (null === $badDomain) {
+            throw new EntityNotFoundException('BadDomain не найден');
+        }
+
+        return $badDomain;
+    }
 }

@@ -10,8 +10,8 @@
     "watch": "encore dev --watch"
   },
   "lint-staged": {
-    "*.{js,json}": ["prettier --write", "git add"],
-    "*.{php}": ["vendor/bin/php-cs-fixer --allow-risky=yes --config=.php_cs fix", "git add"]
+    "src/**/*.{js,json}": ["prettier --write", "git add"],
+    "src/**/*.{php}": ["vendor/bin/php-cs-fixer --allow-risky=yes --config=.php_cs fix", "git add"]
   },
   "devDependencies": {
     "@symfony/webpack-encore": "^0.19.0",

@@ -32,9 +32,24 @@ final class BadDomainService implements BadDomainServiceInterface
         $this->domainRepository->deleteDomain($badDomain);
     }
 
+    /**
+     * @param int $domainId
+     * @return BadDomain
+     * @throws \App\Exception\EntityNotFoundException
+     */
     public function getDomainById(int $domainId): BadDomain
     {
         return $this->domainRepository->getDomainById($domainId);
+    }
+
+    /**
+     * @param string $domainName
+     * @return BadDomain
+     * @throws \App\Exception\EntityNotFoundException
+     */
+    public function getDomainByName(string $domainName): BadDomain
+    {
+        return $this->domainRepository->getDomainByName($domainName);
     }
 
     /**

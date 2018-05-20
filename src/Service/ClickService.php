@@ -22,6 +22,14 @@ final class ClickService implements ClickServiceInterface
         $this->clickRepository = $clickRepository;
     }
 
+    public function addClick(ClickDto $clickDto): Click
+    {
+        $click = Click::createFromDto($clickDto);
+        $this->clickRepository->addClick($click);
+
+        return $click;
+    }
+
     /**
      * @return Click[]
      */
@@ -35,23 +43,8 @@ final class ClickService implements ClickServiceInterface
         return $this->clickRepository->getClickById($clickId);
     }
 
-    /**
-     * @param ClickDto $clickDto
-     *
-     * @throws \App\Exception\DoubleClickException
-     */
-    public function handleClick(ClickDto $clickDto): void
+    public function updateClick(Click $click): void
     {
-        try {
-            $click = $this->clickRepository->getClickById($clickDto->getId()->toString());
-
-            $click->incrementErrorCount();
-            $this->clickRepository->updateClick($click);
-
-            throw new DoubleClickException('Клик уже существует');
-        } catch (EntityNotFoundException $e) {
-            $click = Click::createFromDto($clickDto);
-            $this->clickRepository->addClick($click);
-        }
+        $this->clickRepository->updateClick($click);
     }
 }

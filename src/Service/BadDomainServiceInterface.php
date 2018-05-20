@@ -13,7 +13,19 @@ interface BadDomainServiceInterface
 
     public function deleteDomain(BadDomain $badDomain);
 
+    /**
+     * @param int $domainId
+     * @return BadDomain
+     * @throws \App\Exception\EntityNotFoundException
+     */
     public function getDomainById(int $domainId): BadDomain;
+
+    /**
+     * @param string $domainName
+     * @return BadDomain
+     * @throws \App\Exception\EntityNotFoundException
+     */
+    public function getDomainByName(string $domainName): BadDomain;
 
     /**
      * @return BadDomain[]
