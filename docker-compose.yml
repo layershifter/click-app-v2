@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  php:
+    build: docker/php/
+    container_name: "click-php"
+    environment:
+      TIMEZONE: Europe/Kiev
+    volumes:
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+
+  webserver:
+    image: nginx:1.13
+    container_name: "click-nginx"
+    depends_on:
+      - php
+    volumes_from:
+      - php
+    volumes:
+      - ./docker/nginx/app.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 5000:80
+
+  mysql:
+    image: percona/percona-server:5.7
+    container_name: "click-mysql"
+    depends_on:
+      - php
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
